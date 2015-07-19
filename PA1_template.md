@@ -1,10 +1,5 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
-author: Norbert J. Cruz Lebron
----
+# Reproducible Research: Peer Assessment 1
+Norbert J. Cruz Lebron  
 
 ## Overview
 
@@ -18,10 +13,25 @@ The task was completed by separating each part of the analysis into smaller scri
 
 The data and scripts needed are loaded. The data is filtered to remove missing values. The cleaned data is used when missing values can be ignored.
 
-```{r}
 
+```r
     library(dplyr)
-    
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
     library(ggplot2)
 
     source("./scripts/byDate.R")
@@ -35,42 +45,36 @@ The data and scripts needed are loaded. The data is filtered to remove missing v
     data <- read.csv("activity.csv")
     
     cleanData <- filter(data, !is.na(data$steps))
-
 ```
 
 Here is a description of the cleaned data.
 
-```{r, echo = FALSE}
-   
-    str(cleanData)
-     
+
+```
+## 'data.frame':	15264 obs. of  3 variables:
+##  $ steps   : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ date    : Factor w/ 61 levels "2012-10-01","2012-10-02",..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
 ```
 
 
 ## What is mean total number of steps taken per day?
 
-The cleaned data is passed to the function byDate to generate a histogram of the number of steps taken per day. The mean and median values of steps per day are calculated. Missing values are ignored.
+The cleaned data is passed to the function byDate to generate a histogram of the number of steps taken per day. The mean and median values of steps per day are calculated. 
 
-```{r}
-   
-    resultsByDate <- byDate(cleanData, 1)  ## second argument for figure file name 
+
+```r
+    resultsByDate <- byDate(cleanData, 1)
     
     names(resultsByDate) <- c("mean", "median")
-     
 ```
 
 Histogram:
 
 ![Histogram](./figures/histogram1.png)
 
-The mean and median for the total steps per day were `r resultsByDate$mean` and `r resultsByDate$median` respectively.
-
-Code for byDate() can be found in the scripts folder.
-
-
 ## What is the average daily activity pattern?
 
-The clean data is passed to the function byInterval to generate a time series 
 
 
 ## Imputing missing values
