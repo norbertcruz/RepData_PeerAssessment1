@@ -7,7 +7,7 @@ It is now possible to collect a large amount of data about personal movement usi
 
 This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
 
-The task was completed by separating each part of the analysis into smaller scripts of code (functions).
+The task was completed by separating each part of the analysis into smaller scripts of code (functions). Full analysis is done with the analysis.R script.
 
 ## Loading and preprocessing the data
 
@@ -60,11 +60,11 @@ Here is a description of the cleaned data.
 
 ## What is mean total number of steps taken per day?
 
-The cleaned data is passed to the function byDate to generate a histogram of the number of steps taken per day. The mean and median values of steps per day are calculated. 
+The cleaned data is passed to the function byDate to generate a histogram of the number of steps taken per day. The mean and median values of steps per day are calculated. Missing values are ignored.
 
 
 ```r
-    resultsByDate <- byDate(cleanData, 1)
+    resultsByDate <- byDate(cleanData, 1)  ## second argument for figure file name 
     
     names(resultsByDate) <- c("mean", "median")
 ```
@@ -73,8 +73,14 @@ Histogram:
 
 ![Histogram](./figures/histogram1.png)
 
+The mean and median for the total steps per day were  respectively.
+
+Code for byDate() can be found in the scripts folder.
+
+
 ## What is the average daily activity pattern?
 
+The clean data is passed to the function byInterval to generate a time series 
 
 
 ## Imputing missing values
