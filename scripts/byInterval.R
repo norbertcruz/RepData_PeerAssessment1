@@ -1,6 +1,6 @@
 byInterval <- function(data) {  ## performs analysis by interval
     
-    dataByInterval <- group_by(cleanData, interval)
+    dataByInterval <- group_by(data, interval)
     
     dataByInterval <- select(dataByInterval, -date)
     
