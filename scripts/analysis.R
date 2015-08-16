@@ -39,18 +39,18 @@ analysis <- function() {  ## completes all assignment requirements
     
     missValues <- length(filter(data, is.na(data$steps))$steps)
     
-    newData <- modData(data, stepsByInterval)
+    modData <- modData(data, stepsByInterval)
     
-    byDateMod <- byDate(newData, 2)
+    modResultsByDate <- byDate(modData, 2)
     
-    names(byDateMod) <- c("mean", "median")
+    names(modResultsByDate) <- c("mean", "median")
     
-    stepsByDay <- cbind(resultsByDate, byDateMod)
+    stepsByDay <- cbind(resultsByDate, modResultsByDate)
     
     
     ## Activity Pattern in Weekdays and Weekends
     
-    sepData <- mutate(newData, day = weekdays(as.Date(date)))
+    sepData <- mutate(modData, day = weekdays(as.Date(date)))
     
     weekends <- c("Saturday", "Sunday")
     
@@ -74,18 +74,14 @@ analysis <- function() {  ## completes all assignment requirements
     
     sepData <- summarise_each(sepData, funs(mean))
     
-    png()
     
-    dev.copy(png, file = "./figures/timeSeries2.png")
+    ggplot(sepData, aes(interval, steps)) + 
+            
+        geom_line() + facet_wrap(~ dayType, nrow = 2) + 
+            
+        ggtitle("Average Daily Activity Pattern") + 
+            
+        xlab("Time Interval (minutes)") + ylab("Steps")
     
-        ggplot(sepData, aes(interval, steps)) + 
-            
-            geom_line() + facet_wrap(~ dayType, nrow = 2) + 
-            
-            ggtitle("Average Daily Activity Pattern") + 
-            
-            xlab("Time Interval (minutes)") + ylab("Steps")
-        
-    dev.off()
-    
+    ggsave(file = "./figures/timeSeries2.png")
 }

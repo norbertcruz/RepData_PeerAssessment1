@@ -10,9 +10,9 @@ byDate <- function(data, file) {  ## performs analysis by Day
     
     medianByDate <- median(stepsSum$steps)
     
-    max <- max(stepsSum$steps)
+    maxSteps <- max(stepsSum$steps)
     
-    bins <- seq(0, 22500, 2500) ## maxByDay -> 21194
+    bins <- seq(0, 22500, 2500) ## based on maxSteps value
     
     png()
     
@@ -27,6 +27,10 @@ byDate <- function(data, file) {  ## performs analysis by Day
             main = "Total Number of Steps Taken per Day", xlab = "Steps")
     
         axis(1, at = bins, labels = bins)
+        
+        abline(v = meanByDate, col = "red", lwd = 2)
+        
+        abline(v = medianByDate, col = "blue", lwd = 2, lty = 3)
     
     dev.off()
     

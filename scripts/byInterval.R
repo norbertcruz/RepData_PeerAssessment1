@@ -10,21 +10,23 @@ byInterval <- function(data) {  ## performs analysis by interval
     
     maxInterval <- stepsByInterval$interval[stepsByInterval$steps == maxByInterval]
     
-    bins <- 1:length(stepsByInterval$interval)
+    bins <- seq(0, max(unique(stepsByInterval$interval)), 90)
     
     png()
     
     dev.copy(png, file = "./figures/timeSeries1.png")
     
-    with(stepsByInterval, 
-
-        plot(interval, steps, type = "l", main = "Average Daily Activity Pattern",
+        par(las = 2)
+    
+        plot(stepsByInterval$interval, stepsByInterval$steps, type = "l", main = "Average Daily Activity Pattern",
             
-             xlab = "Time Interval (minutes)", ylab = "Steps", xaxt = 'n'),
+             xlab = "Time Interval (minutes)", ylab = "Steps", xaxt = 'n')
         
         axis(1, at = bins, labels = bins)
         
-        )
+        abline(v = maxInterval, col = "red", lty = 3)
+        
+        abline(v = maxInterval+5, col = "blue", lty = 3)
     
     dev.off()
     
